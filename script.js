@@ -34,30 +34,23 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice) {
+    let computerChoice = getComputerChoice();
     if (humanChoice === computerChoice) {
-        return "It's a tie!";
-        resultDisplay.textContent = "It's a tie!";
+        resultDisplay.textContent =  "It's a tie!";
     } else if (
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
         humanScore++;
-        return `You win! ${humanChoice} beats ${computerChoice}.`;
+        resultDisplay.textContent =  `You win! ${humanChoice} beats ${computerChoice}.`;
     } else {
         computerScore++;
-        return `You lose! ${computerChoice} beats ${humanChoice}.`;
+        resultDisplay.textContent =  `You lose! ${computerChoice} beats ${humanChoice}.`;
     }
-}
 
-
-function playGame(humanChoice) {
-
-    const humanSelection = humanChoice;
-    const computerSelection = getComputerChoice();
-    resultDisplay.textContent = `Round ${i}: ${playRound(humanSelection, computerSelection)}`;
-    scoreDisplay.textContent = `Score: You ${humanScore} - Computer ${computerScore}`;
+    scoreDisplay.textContent = `Score: You: ${humanScore} - Computer: ${computerScore}`;
 
     if (humanScore === 5) {
         winnerText.textContent = "Congratulations! You won the game!";
@@ -67,15 +60,24 @@ function playGame(humanChoice) {
         winnerText.textContent = "Sorry, you lost the game.";
         button.forEach(btn => btn.disabled = true);
 
-    } else {
-        winnerText.textContent = "The game is a tie!";
-    }
+    } 
+    // else {
+    //     winnerText.textContent = "The game is a tie!";
+    // }
+}
+
+
+function playGame(humanChoice) {
+
+    const humanSelection = humanChoice;
+    resultDisplay.textContent = `Round ${i}: ${playRound(humanSelection)}`;
+    
 }
 
 
 
-rockButton.addEventListener("click", () => playGame('rock'));
-paperButton.addEventListener("click", () => playGame("paper"));
-scissorsButton.addEventListener("click", () => playGame("scissors"));
+rockButton.addEventListener("click", () => playRound("rock"));
+paperButton.addEventListener("click", () => playRound("paper"));
+scissorsButton.addEventListener("click", () => playRound("scissors"));
 
 
