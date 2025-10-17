@@ -61,9 +61,7 @@ function playRound(humanChoice) {
         button.forEach(btn => btn.disabled = true);
 
     } 
-    // else {
-    //     winnerText.textContent = "The game is a tie!";
-    // }
+
 }
 
 
